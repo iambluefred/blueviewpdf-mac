@@ -1,0 +1,53 @@
+name: BlueViewPDF
+options:
+  bundleIdPrefix: com.iambluefred
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Manual
+    ENABLE_HARDENED_RUNTIME: NO
+targets:
+  BlueViewPDF:
+    type: application
+    platform: macOS
+    sources: [BlueViewPDF]
+    info:
+      path: BlueViewPDF/Info.plist
+      properties:
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: PDF Document
+            CFBundleTypeRole: Viewer
+            LSHandlerRank: Alternate
+            LSItemContentTypes: [com.adobe.pdf]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.iambluefred.blueviewpdf
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: BlueViewPDF
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+  BlueViewPDFTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [BlueViewPDFTests]
+    dependencies:
+      - target: BlueViewPDF
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  BlueViewPDF:
+    build:
+      targets:
+        BlueViewPDF: all
+        BlueViewPDFTests: [test]
+    test:
+      targets: [BlueViewPDFTests]
+    run:
+      config: Debug
